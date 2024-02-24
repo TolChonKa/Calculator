@@ -8,7 +8,7 @@ namespace Calculator
         public class Operations
         {
             static double result;
-            static double[] massiv_volue = new double[1];
+            public static double[] massiv_volue = new double[1];
             public static double OperationsValue(double firstvalue, double secondvalue, string operation)
             {
                 switch (operation)
@@ -133,8 +133,8 @@ namespace Calculator
         static void Main(string[] args)
         {
             Operations operations = new Operations();
-            while (true)
-            {
+
+                double ValueFromMassiv = 0;
                 double[] massiv = new double[1];
                 string operation;
                 double result, firstvalue, secondvalue, number, result_number;
@@ -158,7 +158,6 @@ namespace Calculator
 
                     result = Operations.OperationsValue(firstvalue, secondvalue, operation);
 
-                    Operations.Massiv();
                     Console.WriteLine($"\nРезультат вычислений: {result}");
                 }
 
@@ -173,14 +172,53 @@ namespace Calculator
                     result_number = Operations.OperationEngener(number, operation);
                     Console.WriteLine($"\nРезультат вычислений: {result_number}");
                 }
+            Operations.Massiv();
+            Console.WriteLine();
+            while (true)
+            {
+                Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
+                operation = Console.ReadLine();
 
 
+                // Первое число с прошлой операции //
+                for (int i = 0; i < massiv.Length; i++)
+                {
+                    ValueFromMassiv = massiv[i];
+                }
 
 
+                if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
+                {
+                    
 
-               
-                Console.ReadLine();
+                    Console.Write("\nВведите число: ");
+                    string ReadNumber = Console.ReadLine();
+
+                    Check.CheckNumber(ReadNumber);
+                    number = Check.number;
+
+                    result = Operations.OperationsValue(ValueFromMassiv, number, operation);
+                    Console.WriteLine($"\nРезультат вычислений: {result}");
+
+                }
+
+                else
+                {
+                    Console.Write("\nВведите число: ");
+                    string ReadNumber = Console.ReadLine();
+
+                    Check.CheckNumber(ReadNumber);
+                    number = Check.number;
+
+                    result_number = Operations.OperationEngener(number, operation);
+                    Operations.Massiv();
+                    Console.WriteLine($"\nРезультат вычислений: {result_number}");
+                }
             }
+
+
+
+              
         }
     }
 }
