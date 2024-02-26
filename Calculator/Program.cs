@@ -4,7 +4,13 @@ namespace Calculator
 {
     internal class Program
     {
-
+        //public class Print
+        //{
+        // public static string Prints()
+        //    {
+               
+        //    }   
+        //}
         public class Operations
         {
             static double result;
@@ -92,43 +98,18 @@ namespace Calculator
         }
         class Check
         {
-            public static double _firstvalue, _secondvalue, number;
+            public static double Value;
             public static double CheckVolue(string ReadVolue)
             {
-                bool result = double.TryParse(ReadVolue, out _firstvalue);
-                if (result == true)
+                bool result = double.TryParse(ReadVolue, out Value);
+                if (result)
                 {
-                    return _firstvalue;
+                    return Value;
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
+               
             }
-            public static double CheckVolue2(string ReadVolue2)
-            {
-                bool result = double.TryParse(ReadVolue2, out _secondvalue);
-                if (result == true)
-                {
-                    return _secondvalue;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            public static double CheckNumber(string ReadNumber)
-            {
-                bool result = double.TryParse(ReadNumber, out number);
-                if (result == true)
-                {
-                    return number;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            
         }
 
 
@@ -151,12 +132,12 @@ namespace Calculator
                 Console.Write("\nВведите первое число: ");
                 string ReadVolue = Console.ReadLine();
                 Check.CheckVolue(ReadVolue);
-                firstvalue = Check._firstvalue;
+                firstvalue = Check.Value;
 
                 Console.Write("\nВведите второе число: ");
                 string ReadVolue2 = Console.ReadLine();
-                Check.CheckVolue2(ReadVolue2);
-                secondvalue = Check._secondvalue;
+                Check.CheckVolue(ReadVolue2);
+                secondvalue = Check.Value;
 
                 result = Operations.OperationsValue(firstvalue, secondvalue, operation);
 
@@ -168,8 +149,8 @@ namespace Calculator
                 Console.Write("\nВведите число: ");
                 string ReadNumber = Console.ReadLine();
 
-                Check.CheckNumber(ReadNumber);
-                number = Check.number;
+                Check.CheckVolue(ReadNumber);
+                number = Check.Value;
 
                 result_number = Operations.OperationEngener(number, operation);
                 Console.WriteLine($"\nРезультат вычислений: {result_number}");
@@ -179,6 +160,7 @@ namespace Calculator
             {
                 Console.Clear();
                 Operations.Massiv(massiv);
+
                 // Первое число с прошлой операции //
                 for (int i = 0; i < massiv.Length; i++)
                 {
@@ -196,8 +178,8 @@ namespace Calculator
                     Console.Write("\nВведите число: ");
                     string ReadNumber = Console.ReadLine();
 
-                    Check.CheckNumber(ReadNumber);
-                    number = Check.number;
+                    Check.CheckVolue(ReadNumber);
+                    number = Check.Value;
 
                     result = Operations.OperationsValue(ValueFromMassiv, number, operation);
                     Console.WriteLine($"\nРезультат вычислений: {result}");
@@ -207,24 +189,12 @@ namespace Calculator
                 }
                 else
                 {
-
-                    //Console.Write("\nВведите число: ");
-                    //string ReadNumberTwo = Console.ReadLine();
-
-                    //Check.CheckNumber(ReadNumberTwo);
-                    //number = Check.number;
-
                     result_number = Operations.OperationEngener(ValueFromMassiv, operation);
                     Console.WriteLine($"\nРезультат вычислений: {result_number}");
                 }
-
             }
         }
-
     }
-
-
-
 }
 
 
