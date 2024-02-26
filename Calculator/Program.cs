@@ -8,7 +8,7 @@ namespace Calculator
         public class Operations
         {
             static double result;
-            static double[] massiv_volue = new double[1];
+            public static double[] massiv_volue = new double[1];
             public static double OperationsValue(double firstvalue, double secondvalue, string operation)
             {
                 switch (operation)
@@ -32,15 +32,17 @@ namespace Calculator
                         return 0;
 
                 }
-                
+
             }
-            public static void Massiv()
+            public static double Massiv(double[] massivchik)
             {
                 for (int i = 0; i < massiv_volue.Length; i++)
                 {
                     massiv_volue[i] = result;
+                    return massivchik[i] = massiv_volue[i];
 
                 }
+                return 0;
             }
 
             public static double OperationEngener(double number, string operation)
@@ -133,54 +135,102 @@ namespace Calculator
         static void Main(string[] args)
         {
             Operations operations = new Operations();
+
+            double ValueFromMassiv = 0;
+            double[] massiv = new double[1];
+            string operation;
+            double result, firstvalue, secondvalue, number, result_number;
+
+
+            Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
+            operation = Console.ReadLine();
+
+
+            if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
+            {
+                Console.Write("\nВведите первое число: ");
+                string ReadVolue = Console.ReadLine();
+                Check.CheckVolue(ReadVolue);
+                firstvalue = Check._firstvalue;
+
+                Console.Write("\nВведите второе число: ");
+                string ReadVolue2 = Console.ReadLine();
+                Check.CheckVolue2(ReadVolue2);
+                secondvalue = Check._secondvalue;
+
+                result = Operations.OperationsValue(firstvalue, secondvalue, operation);
+
+                Console.WriteLine($"\nРезультат вычислений: {result}");
+            }
+
+            else
+            {
+                Console.Write("\nВведите число: ");
+                string ReadNumber = Console.ReadLine();
+
+                Check.CheckNumber(ReadNumber);
+                number = Check.number;
+
+                result_number = Operations.OperationEngener(number, operation);
+                Console.WriteLine($"\nРезультат вычислений: {result_number}");
+            }
+            Console.WriteLine();
             while (true)
             {
-                double[] massiv = new double[1];
-                string operation;
-                double result, firstvalue, secondvalue, number, result_number;
-
-
+                Console.Clear();
+                Operations.Massiv(massiv);
+                // Первое число с прошлой операции //
+                for (int i = 0; i < massiv.Length; i++)
+                {
+                    ValueFromMassiv = massiv[i];
+                }
+                Console.WriteLine(ValueFromMassiv);
                 Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
                 operation = Console.ReadLine();
+
+                //Operations.Massiv(massiv);
+                //// Первое число с прошлой операции //
+                //for (int i = 0; i < massiv.Length; i++)
+                //{
+                //    ValueFromMassiv = massiv[i];
+                //}
 
 
                 if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
                 {
-                    Console.Write("\nВведите первое число: ");
-                    string ReadVolue = Console.ReadLine();
-                    Check.CheckVolue(ReadVolue);
-                    firstvalue = Check._firstvalue;
 
-                    Console.Write("\nВведите второе число: ");
-                    string ReadVolue2 = Console.ReadLine();
-                    Check.CheckVolue2(ReadVolue2);
-                    secondvalue = Check._secondvalue;
 
-                    result = Operations.OperationsValue(firstvalue, secondvalue, operation);
-
-                    Operations.Massiv();
-                    Console.WriteLine($"\nРезультат вычислений: {result}");
-                }
-
-                else
-                {
                     Console.Write("\nВведите число: ");
                     string ReadNumber = Console.ReadLine();
 
                     Check.CheckNumber(ReadNumber);
                     number = Check.number;
 
+                    result = Operations.OperationsValue(ValueFromMassiv, number, operation);
+                    Console.WriteLine($"\nРезультат вычислений: {result}");
+
+                    Console.WriteLine();
+
+                }
+                else
+                {
+
+                    Console.Write("\nВведите число: ");
+                    string ReadNumberTwo = Console.ReadLine();
+
+                    Check.CheckNumber(ReadNumberTwo);
+                    number = Check.number;
+
                     result_number = Operations.OperationEngener(number, operation);
                     Console.WriteLine($"\nРезультат вычислений: {result_number}");
                 }
 
-
-
-
-
-               
-                Console.ReadLine();
             }
         }
+
     }
+
+
+
 }
+
