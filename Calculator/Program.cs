@@ -188,13 +188,6 @@ namespace Calculator
                 Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
                 operation = Console.ReadLine();
 
-                //Operations.Massiv(massiv);
-                //// Первое число с прошлой операции //
-                //for (int i = 0; i < massiv.Length; i++)
-                //{
-                //    ValueFromMassiv = massiv[i];
-                //}
-
 
                 if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
                 {
