@@ -142,7 +142,7 @@ namespace Calculator
             double result, firstvalue, secondvalue, number, result_number;
 
 
-            Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
+            Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^): ");
             operation = Console.ReadLine();
 
 
@@ -208,13 +208,13 @@ namespace Calculator
                 else
                 {
 
-                    Console.Write("\nВведите число: ");
-                    string ReadNumberTwo = Console.ReadLine();
+                    //Console.Write("\nВведите число: ");
+                    //string ReadNumberTwo = Console.ReadLine();
 
-                    Check.CheckNumber(ReadNumberTwo);
-                    number = Check.number;
+                    //Check.CheckNumber(ReadNumberTwo);
+                    //number = Check.number;
 
-                    result_number = Operations.OperationEngener(number, operation);
+                    result_number = Operations.OperationEngener(ValueFromMassiv, operation);
                     Console.WriteLine($"\nРезультат вычислений: {result_number}");
                 }
 
