@@ -1,19 +1,13 @@
 ﻿using System;
+using System.Threading;
 
 namespace Calculator
 {
     internal class Program
     {
-        //public class Print
-        //{
-        // public static string Prints()
-        //    {
-               
-        //    }   
-        //}
         public class Operations
         {
-            static double result;
+            public static double result;
             public static double[] massiv_volue = new double[1];
             public static double OperationsValue(double firstvalue, double secondvalue, string operation)
             {
@@ -40,16 +34,7 @@ namespace Calculator
                 }
 
             }
-            public static double Massiv(double[] massivchik)
-            {
-                for (int i = 0; i < massiv_volue.Length; i++)
-                {
-                    massiv_volue[i] = result;
-                    return massivchik[i] = massiv_volue[i];
 
-                }
-                return 0;
-            }
 
             public static double OperationEngener(double number, string operation)
             {
@@ -95,106 +80,145 @@ namespace Calculator
                 }
                 return result;
             }
+            //static public void AC_Programm(double Volue)
+            //{
+            //    Program._default = 
+            //}
         }
         class Check
         {
             public static double Value;
+            public static bool result;
             public static double CheckVolue(string ReadVolue)
             {
-                bool result = double.TryParse(ReadVolue, out Value);
+                result = double.TryParse(ReadVolue, out Value);
                 if (result)
                 {
                     return Value;
                 }
                 return 0;
-               
+
             }
-            
+
         }
 
+        class Memory
+        {
+            static double[] MemoryResult = new double[1];
+
+            public static void MemoryRead()
+            {
+                Console.WriteLine(MemoryResult[0]); 
+            }
+
+            public static void Memory_Addition_Deduction(string String_Read)
+            {
+                if (String_Read == "M+" || String_Read == "m+" || String_Read == "м+" || String_Read == "М+")
+                {
+                    MemoryResult[0] += Operations.result;
+                }
+                if (String_Read == "M-" || String_Read == "m-" || String_Read == "м-" || String_Read == "М-")
+                {
+                    MemoryResult[0] -= Operations.result;
+                }
+            }
+
+            public static void Memory_Clear()
+            {
+                    MemoryResult[0] *= 0;
+            }
+        }
 
         static void Main(string[] args)
         {
-            Operations operations = new Operations();
 
-            double ValueFromMassiv = 0;
-            double[] massiv = new double[1];
-            string operation;
-            double result, firstvalue, secondvalue, number, result_number;
+           
+            string[] massiv = new string[1];
+            double _default = 0;
+            double number = 0;
+            double[] MR = new double[1];
+            //double result, firstvalue, secondvalue, number, result_number;
 
-
-            Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^): ");
-            operation = Console.ReadLine();
-
-
-            if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
-            {
-                Console.Write("\nВведите первое число: ");
-                string ReadVolue = Console.ReadLine();
-                Check.CheckVolue(ReadVolue);
-                firstvalue = Check.Value;
-
-                Console.Write("\nВведите второе число: ");
-                string ReadVolue2 = Console.ReadLine();
-                Check.CheckVolue(ReadVolue2);
-                secondvalue = Check.Value;
-
-                result = Operations.OperationsValue(firstvalue, secondvalue, operation);
-
-                Console.WriteLine($"\nРезультат вычислений: {result}");
-            }
-
-            else
-            {
-                Console.Write("\nВведите число: ");
-                string ReadNumber = Console.ReadLine();
-
-                Check.CheckVolue(ReadNumber);
-                number = Check.Value;
-
-                result_number = Operations.OperationEngener(number, operation);
-                Console.WriteLine($"\nРезультат вычислений: {result_number}");
-            }
-            Console.WriteLine();
             while (true)
             {
-                Console.Clear();
-                Operations.Massiv(massiv);
+                var Value = Console.ReadLine();
 
-                // Первое число с прошлой операции //
-                for (int i = 0; i < massiv.Length; i++)
+                if (Value == "Clear" || Value == "clear" )
                 {
-                    ValueFromMassiv = massiv[i];
+                    Console.Clear();
+                    Console.WriteLine(Operations.result);
+                    continue;
                 }
-                Console.WriteLine(ValueFromMassiv);
-                Console.Write("Выберете какую операцию хотите выполнить (+, -, *, /, sin, cos, tg, arctg, log, ln, !, 1/x , exp, ^ : ");
-                operation = Console.ReadLine();
 
-
-                if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "^")
+                if (Value == "MR" || Value == "mr" ||  Value == "мr" || Value == "Мr")
                 {
+                    Memory.MemoryRead();
+                    continue;
+                }
+
+                if (Value == "M+" || Value == "m+" || Value == "м+" || Value == "М+")
+                {
+                    Memory.Memory_Addition_Deduction(Value);
+                    continue;
+                }
+
+                if (Value == "M-" || Value == "m-" || Value == "м-" || Value == "М-")
+                {
+                    Memory.Memory_Addition_Deduction(Value);
+                    continue;
+                }
+
+                if (Value == "MC" || Value == "mc" || Value == "мс" || Value == "МС")
+                {
+                    Memory.Memory_Clear();
+                    continue;
+                }
 
 
-                    Console.Write("\nВведите число: ");
-                    string ReadNumber = Console.ReadLine();
+                if (Value == "+" || Value == "-" || Value == "*" || Value == "/" || Value == "^" || Value == "sin" || Value == "cos" || Value == "tan" || Value == "arctg" || Value == "exp" || Value == "log" || Value == "ln" || Value == "1/x" || Value == "!")
+                {
+                    for (int i = 0; i < massiv.Length; i++)
+                    {
+                        massiv[i] = Value;
+                    }
 
-                    Check.CheckVolue(ReadNumber);
+                }
+
+                Check.CheckVolue(Value);
+
+                if (Value == "+" || Value == "-" || Value == "*" || Value == "/" || Value == "^")
+                {
+                    continue;
+                }
+                if (Check.result)
+                {
                     number = Check.Value;
-
-                    result = Operations.OperationsValue(ValueFromMassiv, number, operation);
-                    Console.WriteLine($"\nРезультат вычислений: {result}");
-
-                    Console.WriteLine();
-
                 }
-                else
+                if (massiv[0] != null)
                 {
-                    result_number = Operations.OperationEngener(ValueFromMassiv, operation);
-                    Console.WriteLine($"\nРезультат вычислений: {result_number}");
+                    if (massiv[0] == "+" || massiv[0] == "-" || massiv[0] == "*" || massiv[0] == "/" || massiv[0] == "^")
+                    {
+                        Operations.OperationsValue(_default, number, massiv[0]);
+
+                    }
+                    else { Operations.OperationEngener(_default, massiv[0]); }
                 }
+
+                _default = number;
+                if (Value == "AC" || Value == "ac")
+                {
+                    _default = 0;
+                    number = 0;
+                    massiv[0] = null;
+                    continue;
+                }
+                if (massiv[0] != null) { Console.WriteLine(Operations.result); _default = Operations.result; }
+                
+
             }
         }
     }
 }
+
 
 
